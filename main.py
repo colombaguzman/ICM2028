@@ -200,6 +200,7 @@ def dibujar_viga_y_cargas(L, A1, A2, qs, x_max_m):
     ancho_figura = 0.8 * L + 2  # Ajusta el ancho visual según la longitud de la viga
     alto_figura = 6             # Altura constante para que todo sea visible en Y
     fig, ax = plt.subplots(figsize=(ancho_figura, alto_figura))
+    ax.grid(False)  #Oculta la cuadrícula
     # Límites del gráfico
     ax.set_xlim(-1, L + 1)   # Eje X depende del largo de la viga
     # Mostrar hasta ±5 sin cortes
