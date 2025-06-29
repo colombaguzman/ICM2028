@@ -199,9 +199,7 @@ def dibujar_viga_y_cargas(L, A1, A2, qs, x_max_m):
     # Tamaño del gráfico: ancho proporcional al largo de la viga, alto fijo para eje Y [-5, 5]
     ancho_figura = 0.8 * L + 2  # Ajusta el ancho visual según la longitud de la viga
     alto_figura = 6             # Altura constante para que todo sea visible en Y
-
     fig, ax = plt.subplots(figsize=(ancho_figura, alto_figura))
-
     # Límites del gráfico
     ax.set_xlim(-1, L + 1)   # Eje X depende del largo de la viga
     # Mostrar hasta ±5 sin cortes
@@ -210,12 +208,9 @@ def dibujar_viga_y_cargas(L, A1, A2, qs, x_max_m):
     ax.tick_params(axis='y', left=False, labelleft=False)
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
-
-
     # ------------------------ VIGA ----------------------------------------------------------
     viga_rect = plt.Rectangle((0, -1), L, 1, color="grey")
     ax.add_patch(viga_rect)
-
     # ------------------------ CARGAS ----------------------------------------------------------
     for q in qs:
         magnitud, pos, tipo = q
@@ -304,7 +299,7 @@ def dibujar_viga_y_cargas(L, A1, A2, qs, x_max_m):
     # Línea punteada indicando el lugar del momento máximo
     ax.plot([x_max_m, x_max_m], [-1, 0], color="#00bcd4", linestyle="--", linewidth=2)
 
-    # Ejes tipo plano cartesiano con cuadrícula
+    # Ejes tipo plano cartesiano SIN cuadrícula
     ax.spines['left'].set_position('zero')
     ax.spines['bottom'].set_position('zero')
     ax.spines['left'].set_linewidth(2)
@@ -312,16 +307,10 @@ def dibujar_viga_y_cargas(L, A1, A2, qs, x_max_m):
     ax.spines['right'].set_color('none')
     ax.spines['top'].set_color('none')
     ax.tick_params(left=True, bottom=True)
-    ax.grid(True, linestyle='--', linewidth=0.5)
-
     ax.set_xlim(-1, L + 1)
-    
     ax.set_title("Viga con Cargas Aplicadas")
     display(fig, target="output", append=False)
     plt.close(fig)
-
-    
-
 
 
 
