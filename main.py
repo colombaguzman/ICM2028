@@ -127,7 +127,7 @@ async def plot_it(*args, **kwargs):
     color_v = "#7e57c2"    # Morado oscuro
     color_m = "#d81b60"    # Rosado oscuro
 
-    #cargas
+    #Primer gráfico de visualización de cargas y apoyos
     dibujar_viga_y_cargas(L, A1, A2, qs, x_momento_max)
 
     # ---------- GRÁFICO DE CORTE ----------
@@ -139,14 +139,16 @@ async def plot_it(*args, **kwargs):
     ax1.set_title("Esfuerzo de Corte")
     
     # Ejes tipo plano cartesiano
-    ax1.spines['left'].set_position('zero')
+    # Ejes tipo plano cartesiano (sin eje Y visible)
     ax1.spines['bottom'].set_position('zero')
-    ax1.spines['left'].set_linewidth(2)
     ax1.spines['bottom'].set_linewidth(2)
+    ax1.spines['left'].set_color('none')  # Ocultar eje Y
     ax1.spines['right'].set_color('none')
     ax1.spines['top'].set_color('none')
-    ax1.tick_params(left=True, bottom=True)
+    
+    ax1.tick_params(left=False, bottom=True, labelleft=False)  # Ocultar ticks y etiquetas del eje Y
     ax1.grid(True, linestyle='--', linewidth=0.5)
+
     
     # ---------- GRÁFICO DE MOMENTO ----------
     fig_momento, ax2 = plt.subplots()
