@@ -295,6 +295,7 @@ def dibujar_viga_y_cargas(L, A1, A2, qs, x_max_m):
             ax.add_patch(triangle)
 
 
+
     # Línea punteada indicando el lugar del momento máximo
     ax.plot([x_max_m, x_max_m], [-1, 0], color="#00bcd4", linestyle="--", linewidth=2)
 
