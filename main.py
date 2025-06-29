@@ -287,9 +287,9 @@ def dibujar_viga_y_cargas(L, A1, A2, qs, x_max_m):
         ha='center', fontsize=14, fontweight='bold', color='black')
 
 
-     # Apoyos
+    # ------------------------ APOYOS -----------------------------------------------
     for tipo, x in [A1, A2]:
-        if tipo == 1:
+        if tipo in [1, 2]:  # Fuerza o Momento
             # Triángulo de base en y = -2, punta en y = -1 (debajo de la viga)
             triangle = plt.Polygon([[x - 0.3, -2], [x + 0.3, -2], [x, -1]], color="#ec407a")
             ax.add_patch(triangle)
