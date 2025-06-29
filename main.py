@@ -222,7 +222,7 @@ def dibujar_viga_y_cargas(L, A1, A2, qs, x_max_m):
                 ax.arrow(pos, 0, 0, 2,
                          head_width=0.2, head_length=0.2,
                          fc="#7e57c2", ec="#7e57c2")
-                ax.text(pos, 2.3, f'{magnitud:.0f} N',ha='center', fontsize=9, weight='bold')
+                ax.text(pos, 2.6, f'{magnitud:.0f} N',ha='center', fontsize=9, weight='bold')
             else:
                 # Flecha hacia abajo desde y = -1 hasta y = -3
                 ax.arrow(pos, -1, 0, -2,
