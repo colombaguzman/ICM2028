@@ -227,7 +227,7 @@ def dibujar_viga_y_cargas(L, A1, A2, qs, x_max_m):
                 ax.arrow(pos, -1, 0, -2,
                          head_width=0.2, head_length=0.2,
                          fc="#7e57c2", ec="#7e57c2")
-                ax.text((inicio + fin) / 2, -altura - 0.5, f"{abs(magnitud)} N/m", ha='center', fontsize=12, fontweight='bold')
+                ax.text(pos, -3.3, f"{abs(magnitud):.0f} N", ha='center', fontsize=12, fontweight='bold')
 
         # -----------------MOMENTO PUNTUAL ------------------------------------------------------
         elif tipo == -2 and magnitud != 0:
