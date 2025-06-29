@@ -207,6 +207,7 @@ def dibujar_viga_y_cargas(L, A1, A2, qs, x_max_m):
     ax.set_ylim(-5.2, 5.2) 
     ax.spines['left'].set_visible(False)
     ax.tick_params(axis='y', left=False, labelleft=False)
+    ax.set_yticks([])  #Esta línea elimina los ticks del eje Y
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
     # ------------------------ VIGA ----------------------------------------------------------
