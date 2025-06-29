@@ -238,37 +238,27 @@ def dibujar_viga_y_cargas(L, A1, A2, qs, x_max_m):
         elif tipo == -2 and magnitud != 0:
             radius = 0.4
             center_y = -0.5  # centro en y = -0.5
-        
-            # Ángulo de barrido más cerrado para flecha estilizada
             angle_span = np.pi / 1.5
-        
             if magnitud > 0:
-                theta = np.linspace(np.pi, np.pi - angle_span, 100)
+                theta = np.linspace(np.pi, np.pi - angle_span, 100)  #antihorario positivo
+                punta_idx = -1
             else:
-                theta = np.linspace(0, angle_span, 100)
-        
+                theta = np.linspace(0, angle_span, 100)              #horario negativo
+                punta_idx = 0
             x_arc = pos + radius * np.cos(theta)
             y_arc = center_y + radius * np.sin(theta)
-        
             ax.plot(x_arc, y_arc, color="#e91e63", linewidth=2)
-        
-            # Flecha en el extremo
             punta_x = x_arc[-1]
             punta_y = y_arc[-1]
             dx = x_arc[-1] - x_arc[-2]
             dy = y_arc[-1] - y_arc[-2]
-        
             ax.arrow(punta_x, punta_y, dx, dy,
                      head_width=0.08, head_length=0.08,
                      fc="#e91e63", ec="#e91e63")
-        
-            # Punto en el centro de aplicación del momento
+            #  Importante : Punto en el centro de aplicación del momento
             ax.plot(pos, center_y, marker='o', markersize=8, color="#e91e63")
-        
-            # Texto debajo del centro
             ax.text(pos, center_y - 0.5, f'{magnitud:.0f} Nm',
                     ha='center', fontsize=9, weight='bold', color="black")
-
 
         # ------------------------ CARGAS DISTRIBUIDAS ------------------------------------------
         elif tipo == 0 and magnitud != 0:
