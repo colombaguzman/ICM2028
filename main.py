@@ -238,7 +238,7 @@ def dibujar_viga_y_cargas(L, A1, A2, qs, x_max_m):
                 theta = np.linspace(np.pi, np.pi - angle_span, 100)  #antihorario positivo
                 punta_idx = -1
             else:
-                theta = np.linspace(0, angle_span, 100)              #horario negativo
+                theta = np.linspace(0, angle_span, 100) #horario negativo
                 punta_idx = 0
             x_arc = pos + radius * np.cos(theta)
             y_arc = center_y + radius * np.sin(theta)
@@ -274,19 +274,16 @@ def dibujar_viga_y_cargas(L, A1, A2, qs, x_max_m):
                     ax.arrow(xi, 0, 0, 2,
                              head_width=0.1, head_length=0.1,
                              fc='purple', ec='purple')
-                ax.text((inicio + fin) / 2, 2.3,
-                        f'{magnitud:.0f} N/m',
-                        ha='center', fontsize=14)
+                ax.text((inicio + fin) / 2, 2.3, f'{abs(magnitud):.0f} N/m',
+        ha='center', fontsize=14, fontweight='bold', color='black')
+
             else:
                 for xi in xs:
                     ax.arrow(xi, -1, 0, -2,
                              head_width=0.1, head_length=0.1,
                              fc='purple', ec='purple')
-                ax.text((inicio + fin) / 2, -3.6,
-                        f'{magnitud:.0f} N/m',
-                        ha='center', fontsize=14)
-
-                
+                ax.text((inicio + fin) / 2, -3.6, f'{abs(magnitud):.0f} N/m',
+        ha='center', fontsize=14, fontweight='bold', color='black')
 
 
     # ------------------------APOYOS ----------------------------------------------------------
