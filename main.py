@@ -139,14 +139,13 @@ async def plot_it(*args, **kwargs):
     ax1.set_title("Esfuerzo de Corte")
     
     # Ejes tipo plano cartesiano
-    # Ejes tipo plano cartesiano (sin eje Y visible)
+    ax1.spines['left'].set_position('zero')
     ax1.spines['bottom'].set_position('zero')
+    ax1.spines['left'].set_linewidth(2)
     ax1.spines['bottom'].set_linewidth(2)
-    ax1.spines['left'].set_color('none')  # Ocultar eje Y
     ax1.spines['right'].set_color('none')
     ax1.spines['top'].set_color('none')
-    
-    ax1.tick_params(left=False, bottom=True, labelleft=False)  # Ocultar ticks y etiquetas del eje Y
+    ax1.tick_params(left=True, bottom=True)
     ax1.grid(True, linestyle='--', linewidth=0.5)
 
     
@@ -196,7 +195,7 @@ async def plot_it(*args, **kwargs):
     return None
     
 def dibujar_viga_y_cargas(L, A1, A2, qs, x_max_m):
-    # --- PLOT ---
+    # ------------------------ PLOT ----------------------------------------------------------
     # Tamaño del gráfico: ancho proporcional al largo de la viga, alto fijo para eje Y [-5, 5]
     ancho_figura = 0.8 * L + 2  # Ajusta el ancho visual según la longitud de la viga
     alto_figura = 6             # Altura constante para que todo sea visible en Y
@@ -206,23 +205,21 @@ def dibujar_viga_y_cargas(L, A1, A2, qs, x_max_m):
     # Límites del gráfico
     ax.set_xlim(-1, L + 1)   # Eje X depende del largo de la viga
     # Mostrar hasta ±5 sin cortes
-    ax.set_ylim(-5.2, 5.2)  # Leve expansión para evitar clipping visual
-    ax.set_yticks(np.arange(-5, 6, 1))
-    ax.tick_params(axis='y', direction='inout', length=6)
-    
-    # Asegura que el marco superior/inferior no tape el borde
+    ax.set_ylim(-5.2, 5.2) 
+    ax.spines['left'].set_visible(False)
+    ax.tick_params(axis='y', left=False, labelleft=False)
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
 
 
-    # Viga 
+    # ------------------------ VIGA ----------------------------------------------------------
     viga_rect = plt.Rectangle((0, -1), L, 1, color="grey")
     ax.add_patch(viga_rect)
 
-    # Cargas
+    # ------------------------ CARGAS ----------------------------------------------------------
     for q in qs:
         magnitud, pos, tipo = q
-        #fuerza puntual 
+        # ------------------------ fUERZA PUNTUAL ------------------------------------------------------
         if tipo == -1 and magnitud != 0:
             if magnitud > 0:
                 # Flecha hacia arriba desde y = 0 hasta y = 2
@@ -238,10 +235,7 @@ def dibujar_viga_y_cargas(L, A1, A2, qs, x_max_m):
                          fc="#7e57c2", ec="#7e57c2")
                 ax.text(pos, -3.6, f'{magnitud:.0f} N',
                         ha='center', fontsize=9, weight='bold')
-
-
-
-        ##momento puntuaaal##
+        # -----------------MOMENTO PUNTUAL ------------------------------------------------------
         elif tipo == -2 and magnitud != 0:
             radius = 0.4
             center_y = -0.5  # centro en y = -0.5
@@ -277,7 +271,7 @@ def dibujar_viga_y_cargas(L, A1, A2, qs, x_max_m):
                     ha='center', fontsize=9, weight='bold', color="black")
 
 
-        ##cargas distribuias##
+        # ------------------------ CARGAS DISTRIBUIDAS ------------------------------------------
         elif tipo == 0 and magnitud != 0:
             # Verifica si es la primera mitad de una carga simétrica
             pareja = next((q2 for q2 in qs if q2[0] == -magnitud and q2[2] == 0), None)
@@ -311,7 +305,7 @@ def dibujar_viga_y_cargas(L, A1, A2, qs, x_max_m):
                 
 
 
-    # Apoyos
+    # ------------------------APOYOS ----------------------------------------------------------
     for tipo, x in [A1, A2]:
         if tipo == 1:
             # Triángulo de base en y = -2, punta en y = -1 (debajo de la viga)
